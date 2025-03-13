@@ -13,6 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import android.content.Intent
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +31,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
+
     // Pantalla principal que contiene todos los elementos
     Surface(
         modifier = Modifier.fillMaxSize(),
@@ -45,6 +48,7 @@ fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
             BusinessItem("Negocios de la Nave 1")
             BusinessItem("Negocios de la Nave 2")
             BusinessItem("Negocios de la Nave 3")
+            BusinessItem("Atracciones y concierto")
             
             // Botón para navegar a la segunda actividad
             Button(
@@ -59,13 +63,19 @@ fun MainScreen(onNavigateToSecondActivity: () -> Unit) {
 
 @Composable
 fun BusinessItem(text: String) {
+    val purpleLight = Color(0xFF6650a4)
+    val purpleDark = Color(0xFFD0BCFF)
     // Componente reutilizable para mostrar negocio con imagen
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(120.dp)
-    ) {
-        Row(
+            .height(120.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = purpleLight,
+            contentColor = Color.White
+        )
+    )
+    { Row(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp),
@@ -86,4 +96,11 @@ fun BusinessItem(text: String) {
             )
         }
     }
+}
+
+//funcion para que se vea el preview del programa
+@Preview
+@Composable
+fun PreviewMainScree(){
+    MainScreen(onNavigateToSecondActivity= {})
 }
